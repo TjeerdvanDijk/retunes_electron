@@ -1,0 +1,55 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    margin: 0;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+strong, em, b {
+    font-family: "Lucida Sans", "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.mainbox .resizer {
+    width: 1px;
+    background-color: #464545;
+}
+
+.mainbox .resizer .hit-area { 
+    height: 100%;
+    width: 6px;
+    position: relative;
+    left:-2px;
+    cursor: col-resize;
+}
+
+.mainbox {
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    cursor:default;
+}
+
+.mainbox .tracks {
+    flex-grow: 1;
+    background-color: #1d1d1d;
+}
+
+.mainbox .sidebar {
+    background: lightgray;
+    min-width: 150px;
+    max-width: calc(100vw - 150px);
+    background-color: #1d1d1d;
+}
+
+.sidebar .sidebar-header {
+    /* background-color: rgb(85, 85, 85); */
+    height: 30px;
+    border-bottom: 1px solid #292929;
+}
