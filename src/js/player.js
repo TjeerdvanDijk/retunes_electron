@@ -15,8 +15,6 @@ const track_position_needle_scaler = document.querySelector(".track-position-nee
 
 
 var currentsong = document.querySelector(".song");
-var currentsongTitle = "";
-var currentsongArtist = "";
 currentsong.id = 'audio-player';
 var isAif = true;
 
@@ -45,25 +43,17 @@ function moveVolume(e) {
     // console.log(cappedPercentage);
 }
 
+// buttons on titlebar
 document.getElementById('play').addEventListener('click', () => playClicked());
-document.getElementById('pause').addEventListener('click', () => pauseClicked());
+document.getElementById('pause').addEventListener('click', () => currentsong.pause());
 
 function playClicked() {
-    if(!currentsong.src) {
+    console.log("play clicked");
+    if (!currentsong.src) {
         loadSong("");
-        document.getElementById('play').style.setProperty('display', 'none');
-        document.getElementById('pause').style.setProperty('display', 'flex');
     } else {
         currentsong.play();
-        document.getElementById('play').style.setProperty('display', 'none');
-        document.getElementById('pause').style.setProperty('display', 'flex');
     }
-}
-
-function pauseClicked() {
-    currentsong.pause();
-    document.getElementById('play').style.setProperty('display', 'flex');
-    document.getElementById('pause').style.setProperty('display', 'none');
 }
 
 function loadSong(path) {
@@ -78,22 +68,47 @@ function loadSong(path) {
     } else {
         currentsong.src = '../Flip.mp3';
     }
-    currentsongTitle = "As It Was";
-    currentsongArtist = "Harry Styles";
+    currentsong.volume = volume_slider.value / 100; // initial volume
+    
+    navigator.mediaSession.metadata = new MediaMetadata({
+        title: "As It Was",
+        artist: "Harry Styles",
+        album: "Album",
+        // artwork: [
+        //     { src: "../images/ARTWORK.jpg", sizes: "192x192", type: "image/png" }
+        // ]
+    });
+}
+// navigator.mediaSession.setActionHandler('play', function() { playClicked(); });
+// navigator.mediaSession.setActionHandler('pause', function() { pauseClicked(); });
+// navigator.mediaSession.setActionHandler('previoustrack', function() { /* Code excerpted. */ });
+// navigator.mediaSession.setActionHandler('nexttrack', function() { /* Code excerpted. */ });
+
+currentsong.onplay = function() {
+    navigator.mediaSession.playbackState = "playing";
+    document.getElementById('play').style.setProperty('display', 'none');
+    document.getElementById('pause').style.setProperty('display', 'flex');
 }
 
-
+currentsong.onpause  = function() {
+    navigator.mediaSession.playbackState = "paused";
+    document.getElementById('play').style.setProperty('display', 'flex');
+    document.getElementById('pause').style.setProperty('display', 'none');
+}
 currentsong.onloadeddata = function () {
-    track_title.innerHTML = currentsongTitle;
-    track_artist.innerHTML = currentsongArtist;
+    track_title.innerHTML = navigator.mediaSession.metadata.title;
+    track_artist.innerHTML = navigator.mediaSession.metadata.artist;
     track_time_total.innerHTML = fancyTimeFormat(currentsong.duration);
     currentsong.play();
+    document.querySelector('.hide-track-info').style.setProperty('display', 'contents');
+    document.querySelector('.app-title').style.setProperty('display', 'none');
 }
 
 currentsong.addEventListener("timeupdate", () => {
     track_time_current.innerHTML = fancyTimeFormat(currentsong.currentTime);
     var percentage = (currentsong.currentTime / currentsong.duration) * 100;
     updateNeedle(percentage);
+    
 });
 
 track_position_needle_wiper.addEventListener("mousedown", (event) => {

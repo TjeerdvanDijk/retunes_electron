@@ -70,7 +70,7 @@ button {
 }
 
 .track-position-box .track-position-ellapsed {
-    float:left;
+    float: left;
     background-color: rgb(235, 95, 77);
     position: relative;
     width: 0%;
@@ -89,7 +89,7 @@ button {
     user-select: none;
     position: relative;
     height: 9px;
-    top:-4px;
+    top: -4px;
 }
 
 .track-position-needle-scaler .track-position-needle {
@@ -106,6 +106,47 @@ button {
     border-width: 1px;
     position: absolute;
 }
+
+.hide-track-info {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.app-title {
+    text-shadow: rgb(236, 111, 95) 1px 0 8px;
+    text-align: center;
+    position: absolute;
+    font-size: 16px;
+    letter-spacing: 5px;
+    top: 14px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 12px 100px;
+    background: linear-gradient(to right, rgb(236, 111, 95) 0, rgb(255, 255, 255) 7.5%, rgb(236, 111, 95) 15%);
+    background-position: 0;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 6s infinite linear;
+    animation-fill-mode: forwards;
+    text-decoration: none;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0;
+    }
+
+    40% {
+        background-position: 200px;
+    }
+
+    100% {
+        background-position: 200px;
+    }
+
+}
+
 .toolbar-box-player {
     height: 51px;
     width: 40%;
@@ -266,7 +307,7 @@ button {
     .toolbar-buttons-box-left {
         margin-right: 8.3%;
     }
-  }
+}
 
 .toolbar-buttons-box-left button {
     color: #868686;
@@ -282,19 +323,33 @@ button {
     height: 24px;
 }
 
-.toolbar-buttons-box-left .pause{
+.toolbar-buttons-box-left .pause {
     display: none;
 }
 
-.toolbar-buttons-box-left .play{
+.toolbar-buttons-box-left .play {
     display: flex;
 }
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-30 { font-size: 30px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-30 {
+    font-size: 30px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
 
 .toolbar-buttons-box-right button:hover {
     background-color: rgba(255, 255, 255, 0.055);
