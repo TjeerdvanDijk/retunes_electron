@@ -3,39 +3,42 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   <link rel="stylesheet" type="text/css" href="./styles/index.css">
   <link rel="stylesheet" type="text/css" href="./styles/titlebar.css">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <link rel="stylesheet" href="./libs/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./icons/material-icons/iconfont/material-icons.css">
+  <link rel="stylesheet" href="./icons/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
+  <audio class="song">
+  </audio>
+
   <div class="topnav">
 
     <div class="toolbar-box-left">
       <div class="toolbar-buttons-box-left">
 
-        <button class="prev"><i class="fa fa-backward"></i></button>
-        <!-- <button class="playpause play"><i class="fa fa-play-circle"></i></button> -->
-        <button class="playpause pause"><i class="fa fa-pause-circle-o"></i></button>
-        <button class="next"><i class="fa fa-forward"></i></button>
+        <button id="prev" class="prev"><i class="material-icons">fast_rewind</i></button>
+        <!-- <button id="pause" class="pause"><i class="material-icons md-30">pause</i></button> -->
+        <button id="play" class="play"><i class="material-icons md-30">play_arrow</i></button>
+        <button id="next" class="next"><i class="material-icons">fast_forward</i></button>
 
 
       </div>
 
       <div class="volume-slider">
-        <input type="range" min="0" max="100" value="10">
+        <div class="volume-slider-accent-begin"></div>
+        <div class="volume-slider-accent-end"></div>
+        <input id="volume-slider" type="range" min="0" max="100" value="10">
       </div>
     </div>
 
     <div class="toolbar-box-player">
       <img src="./images/ARTWORK.jpg" width="51" height="51" />
-
-      <p class="track-title">The Drop!</p>
-      <p class="track-artist">Gammer</p>
+      <p class="track-title">As It Was</p>
+      <p class="track-artist">Harry Styles</p>
       <p class="track-time-current">0:23</p>
       <p class="track-time-total">2:49</p>
       <div class="track-position-box">
@@ -73,6 +76,7 @@
   </div>
   <script src="./js/titlebar.js"></script>
   <script src="./js/index.js"></script>
+  <script src="./js/player.js"></script>
 </body>
 
 </html>

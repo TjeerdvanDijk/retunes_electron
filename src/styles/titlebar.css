@@ -11,7 +11,7 @@ button {
     background-color: #0c0f0f;
     height: 51px;
     display: flex;
-    border-bottom: 1px solid #292929;
+    border-bottom: 1px solid #3f3f3f;
 }
 
 .toolbar-box-player img {
@@ -91,7 +91,6 @@ button {
 }
 
 .track-position-needle-scaler .track-position-needle {
-    background-color: purple;
     user-select: none;
     height: 9px;
     top: -1px;
@@ -117,7 +116,7 @@ button {
     -webkit-app-region: no-drag;
     position: relative;
     float: left;
-    padding: 4px 0px 4px 0px;
+    padding: 7px 0px 7px 0px;
     background: transparent;
     border-radius: 20px;
     display: flex;
@@ -126,7 +125,28 @@ button {
     width: 100px;
 }
 
+.volume-slider-accent-begin {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: rgb(235, 95, 77);
+}
+
+.volume-slider-accent-end {
+    position: absolute;
+    width: 90%;
+    margin-left: 10%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: grey;
+}
+
 .volume-slider input {
+    /* pointer-events: none; */
+    position: absolute;
     -webkit-app-region: no-drag;
     -webkit-appearance: none;
     width: 100%;
@@ -134,16 +154,18 @@ button {
     border-radius: 2px;
     margin-left: 0px;
     margin-right: 0px;
-    background: #868686;
+    /* accent-color: #F55050; */
+    background-color: transparent;
 }
 
 .volume-slider input::-webkit-slider-thumb {
+    accent-color: #2ecc71;
     -webkit-app-region: no-drag;
     -webkit-appearance: none;
     width: 16px;
     height: 16px;
     background: #2c2c2c;
-    border: 2px solid #7c7c7c;
+    border: 1px solid #afafaf;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -233,9 +255,8 @@ button {
     justify-content: space-between;
     margin-left: 25px;
     margin-right: 25px;
-    min-width: 115px;
-    max-width: 115px;
-    /* width: 115px; */
+    min-width: 100px;
+    max-width: 100px;
     /* background-color: green; */
 }
 
@@ -255,28 +276,15 @@ button {
     height: 30px;
     width: 30px;
     border-radius: 3px;
-}
-.toolbar-buttons-box-left .prev {
-    height: 23px;
-    font-size: 23px;
-}
-.toolbar-buttons-box-left .next {
-    height: 23px;
-    font-size: 23px;
-}
-.toolbar-buttons-box-left .playpause {
-    font-size: 35px;
+    /* background-color: green; */
+    height: 24px;
 }
 
-.prev i {
-    padding-right: 4px;
-    transform: scaleY(0.7);
-}
-
-.next i {
-    padding-left: 4px;
-    transform: scaleY(0.7);
-}
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-30 { font-size: 30px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
 
 .toolbar-buttons-box-right button:hover {
     background-color: rgba(255, 255, 255, 0.055);
