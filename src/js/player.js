@@ -44,16 +44,16 @@ function moveVolume(e) {
 }
 
 // buttons on titlebar
-document.getElementById('play').addEventListener('click', () => playClicked());
-document.getElementById('pause').addEventListener('click', () => currentsong.pause());
-
-function playClicked() {
-    console.log("play clicked");
+document.getElementById('play').addEventListener('click', () => {
     if (!currentsong.src) {
-        loadSong("");
-    } else {
-        currentsong.play();
+        loadFirstSong();
     }
+    currentsong.play();
+});
+document.getElementById('pause').addEventListener('click', () => {currentsong.pause();});
+
+function loadFirstSong() {
+    loadSong("");
 }
 
 function loadSong(path) {
@@ -69,7 +69,7 @@ function loadSong(path) {
         currentsong.src = '../Flip.mp3';
     }
     currentsong.volume = volume_slider.value / 100; // initial volume
-    
+
     navigator.mediaSession.metadata = new MediaMetadata({
         title: "As It Was",
         artist: "Harry Styles",
@@ -79,18 +79,18 @@ function loadSong(path) {
         // ]
     });
 }
-// navigator.mediaSession.setActionHandler('play', function() { playClicked(); });
-// navigator.mediaSession.setActionHandler('pause', function() { pauseClicked(); });
-// navigator.mediaSession.setActionHandler('previoustrack', function() { /* Code excerpted. */ });
-// navigator.mediaSession.setActionHandler('nexttrack', function() { /* Code excerpted. */ });
 
-currentsong.onplay = function() {
+
+navigator.mediaSession.setActionHandler('previoustrack', function() { console.log("previousTrack"); });
+navigator.mediaSession.setActionHandler('nexttrack', function() { console.log("nextTrack"); });
+
+currentsong.onplay = function () {
     navigator.mediaSession.playbackState = "playing";
     document.getElementById('play').style.setProperty('display', 'none');
     document.getElementById('pause').style.setProperty('display', 'flex');
 }
 
-currentsong.onpause  = function() {
+currentsong.onpause = function () {
     navigator.mediaSession.playbackState = "paused";
     document.getElementById('play').style.setProperty('display', 'flex');
     document.getElementById('pause').style.setProperty('display', 'none');
@@ -108,7 +108,7 @@ currentsong.addEventListener("timeupdate", () => {
     track_time_current.innerHTML = fancyTimeFormat(currentsong.currentTime);
     var percentage = (currentsong.currentTime / currentsong.duration) * 100;
     updateNeedle(percentage);
-    
+
 });
 
 track_position_needle_wiper.addEventListener("mousedown", (event) => {
