@@ -3,6 +3,8 @@ var pathToFfmpeg = require('ffmpeg-static');
 const { exec } = require('child_process');
 
 
+const track_title = document.querySelector(".track-title");
+const track_artist = document.querySelector(".track-artist");
 const track_time_current = document.querySelector(".track-time-current");
 const track_time_total = document.querySelector(".track-time-total");
 const track_position_needle = document.querySelector(".track-position-needle");
@@ -11,17 +13,61 @@ const track_position_needle_wiper = document.querySelector(".track-position-need
 const track_position_needle_scaler = document.querySelector(".track-position-needle-scaler");
 
 
-document.getElementById('play').addEventListener('click', () => playSong());
-
 
 var currentsong = document.querySelector(".song");
+var currentsongTitle = "";
+var currentsongArtist = "";
 currentsong.id = 'audio-player';
 var isAif = true;
 
 
-function playSong() {
+// VOLUME ACCENT
+
+const volume_slider = document.querySelector("#volume-slider");
+const volume_control_accent = document.querySelector(".volume-slider-accent-end");
+
+volume_slider.addEventListener("mousedown", (event) => {
+    moveVolume(event);
+    document.addEventListener("mousemove", moveVolume, false);
+    document.addEventListener("mouseup", () => {
+        document.removeEventListener("mousemove", moveVolume, false);
+    }, false);
+});
+
+function moveVolume(e) {
+    range = volume_slider.getBoundingClientRect().right - volume_slider.getBoundingClientRect().left;
+    pos = e.clientX - volume_slider.getBoundingClientRect().left;
+    percentage = ((pos - 3) / range) * 100;
+    cappedPercentage = Math.max(0, Math.min(percentage, 100));
+    volume_control_accent.style.setProperty('margin-left', cappedPercentage + '%');
+    volume_control_accent.style.setProperty('width', (100 - cappedPercentage) + '%');
+    currentsong.volume = cappedPercentage / 100;
+    // console.log(cappedPercentage);
+}
+
+document.getElementById('play').addEventListener('click', () => playClicked());
+document.getElementById('pause').addEventListener('click', () => pauseClicked());
+
+function playClicked() {
+    if(!currentsong.src) {
+        loadSong("");
+        document.getElementById('play').style.setProperty('display', 'none');
+        document.getElementById('pause').style.setProperty('display', 'flex');
+    } else {
+        currentsong.play();
+        document.getElementById('play').style.setProperty('display', 'none');
+        document.getElementById('pause').style.setProperty('display', 'flex');
+    }
+}
+
+function pauseClicked() {
     currentsong.pause();
-    console.log("hoi");
+    document.getElementById('play').style.setProperty('display', 'flex');
+    document.getElementById('pause').style.setProperty('display', 'none');
+}
+
+function loadSong(path) {
+    currentsong.pause();
     if (isAif) {
         exec(pathToFfmpeg + " -y -i Wave.aif prepairedsong/Wave.wav", (err, stdout, stderr) => {
             if (err) {
@@ -32,6 +78,15 @@ function playSong() {
     } else {
         currentsong.src = '../Flip.mp3';
     }
+    currentsongTitle = "As It Was";
+    currentsongArtist = "Harry Styles";
+}
+
+
+currentsong.onloadeddata = function () {
+    track_title.innerHTML = currentsongTitle;
+    track_artist.innerHTML = currentsongArtist;
+    track_time_total.innerHTML = fancyTimeFormat(currentsong.duration);
     currentsong.play();
 }
 
@@ -55,7 +110,7 @@ function moveNeedleByMouse(e) {
     percentage = ((pos - 3) / range) * 100;
     cappedPercentage = Math.max(0, Math.min(percentage, 100));
     updateNeedle(cappedPercentage);
-    currentsong.currentTime = currentsong.duration * (cappedPercentage /100);
+    currentsong.currentTime = currentsong.duration * (cappedPercentage / 100);
 }
 
 function updateNeedle(percentage) {
@@ -67,8 +122,7 @@ function updateNeedle(percentage) {
 
 
 
-function fancyTimeFormat(duration)
-{   
+function fancyTimeFormat(duration) {
     // Hours, minutes and seconds
     var hrs = ~~(duration / 3600);
     var mins = ~~((duration % 3600) / 60);

@@ -27,12 +27,14 @@ button {
 
 .toolbar-box-player .track-title {
     color: #e4e3e3;
+    height: 18px;
     font-size: 12px;
     margin-top: 4px;
     margin-bottom: 0px;
 }
 
 .toolbar-box-player .track-artist {
+    height: 17px;
     color: #a5a5a5;
     font-size: 11px;
     margin-top: -2px;
@@ -137,8 +139,8 @@ button {
 
 .volume-slider-accent-end {
     position: absolute;
-    width: 90%;
-    margin-left: 10%;
+    width: 75%;
+    margin-left: 25%;
     height: 4px;
     border-radius: 2px;
     background-color: grey;
@@ -278,6 +280,14 @@ button {
     border-radius: 3px;
     /* background-color: green; */
     height: 24px;
+}
+
+.toolbar-buttons-box-left .pause{
+    display: none;
+}
+
+.toolbar-buttons-box-left .play{
+    display: flex;
 }
 
 .material-icons.md-18 { font-size: 18px; }

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <audio class="song">
+  <audio preload="metadata" class="song">
   </audio>
 
   <div class="topnav">
@@ -20,27 +20,26 @@
     <div class="toolbar-box-left">
       <div class="toolbar-buttons-box-left">
 
-        <button id="prev" class="prev"><i class="material-icons">fast_rewind</i></button>
-        <!-- <button id="pause" class="pause"><i class="material-icons md-30">pause</i></button> -->
-        <button id="play" class="play"><i class="material-icons md-30">play_arrow</i></button>
-        <button id="next" class="next"><i class="material-icons">fast_forward</i></button>
-
+        <button id="prev"  class="prev"><i class="material-icons">fast_rewind</i></button>
+        <button id="pause" class="pause"><i class="material-icons md-30">pause</i></button>
+        <button id="play"  class="play"><i class="material-icons md-30">play_arrow</i></button>
+        <button id="next"  class="next"><i class="material-icons">fast_forward</i></button>
 
       </div>
 
       <div class="volume-slider">
         <div class="volume-slider-accent-begin"></div>
         <div class="volume-slider-accent-end"></div>
-        <input id="volume-slider" type="range" min="0" max="100" value="10">
+        <input id="volume-slider" type="range" min="0" max="100" value="25">
       </div>
     </div>
 
     <div class="toolbar-box-player">
       <img src="./images/ARTWORK.jpg" width="51" height="51" />
-      <p class="track-title">As It Was</p>
-      <p class="track-artist">Harry Styles</p>
-      <p class="track-time-current">0:23</p>
-      <p class="track-time-total">2:49</p>
+      <p class="track-title"></p>
+      <p class="track-artist"></p>
+      <p class="track-time-current"></p>
+      <p class="track-time-total"></p>
       <div class="track-position-box">
         <div class="track-position-ellapsed"></div>
         <div class="track-position-needle-wiper">
